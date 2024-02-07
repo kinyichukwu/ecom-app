@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { WhiteShoppingCart, AshLove } from "../../assets/svg/svg";
 import { Button } from "react-native-paper";
@@ -8,9 +8,13 @@ const Product = ({
   name = "African Dou...",
   price = "£30",
   image = "https://s3-alpha-sig.figma.com/img/3fee/85b8/767c901f27b0dbe26a76f3d5cc1f80ae?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=AiYgo8fIhKsYKmgWbAhy80eVh7oysWN7dNW-K46fh~jDX51vU1ICwu13ya0BSgxK-KI2Mi0UAzhtbm2pw1Qjy2EVyUQzXx5tYi0wtAg6DNIdETI052HMWxyZ0QSS3w--f7QJFGBopQGIa4G5qmLqUKlel1WrgZHvkQBTp9Kqd-nU3tNipBQ4syg80cFmoH2nt3fv1jFdzK2WoNrmU5NbE2Lbz2o3~AB2CALxmu7OZJRhcZioDJinEP~JQ~kvDbmeAqiUqwuOv1VVOR6h57VjOWVimZAw6xUoGP5EyfP6o0ybYpc4LGCnRLKtWhdhiC3aFd0x8pDifWSNgWr3VT3g8g__",
+  navigation,
 }) => {
   return (
-    <View style={styles.product}>
+    <TouchableOpacity
+      style={styles.product}
+      onPress={() => navigation.navigate("Product Open")}
+    >
       <View
         style={{
           flexDirection: "row",
@@ -45,7 +49,7 @@ const Product = ({
       <Button
         icon={WhiteShoppingCart}
         mode="contained"
-        onPress={() => console.log("Pressed")}
+        onPress={() => navigation.navigate("Cart")}
         buttonColor={COLORS.primary}
         labelStyle={{
           fontWeight: "regular",
@@ -53,7 +57,7 @@ const Product = ({
       >
         Add to cart
       </Button>
-    </View>
+    </TouchableOpacity>
   );
 };
 

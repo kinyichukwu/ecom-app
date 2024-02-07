@@ -7,6 +7,7 @@ import { useCallback } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import BottomTabNavigation from "./navigation/BottomTabNavigation";
+import ProductOpen from "./screens/ProductOpen";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,13 @@ export default function App() {
         <Stack.Screen
           name="Bottom Navigation"
           component={BottomTabNavigation}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Product Open"
+          component={ProductOpen}
           options={{
             headerShown: false,
           }}

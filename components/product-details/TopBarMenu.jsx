@@ -3,11 +3,11 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons"; // Assuming you're using Expo for vector icons
 
 
-const TopBarMenu = ({ name = "", hide = false, padding = false }) => {
+const TopBarMenu = ({ name = "", hide = false, padding = false, navigation, place = 'ProductDetails' }) => {
   return (
     <View style={{ ...styles.container, paddingHorizontal: padding ? 20 : 0 }}>
       {hide && (
-        <TouchableOpacity style={styles.backButton}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate(place)}>
           <AntDesign name="left" size={18} color="#131313" />
         </TouchableOpacity>
       )}

@@ -15,10 +15,16 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { Minus, Plus, ArrowDown } from "../assets/svg/svg";
 
-const ProductOpen = () => {
+const ProductOpen = ({ navigation }) => {
   return (
     <SafeAreaView>
-      <TopBarMenu name="" hide={true} padding={true} />
+      <TopBarMenu
+        name=""
+        hide={true}
+        padding={true}
+        navigation={navigation}
+        place="ProductDetails"
+      />
       <ScrollView
         contentContainerStyle={styles.productContainer}
         horizontal={false}

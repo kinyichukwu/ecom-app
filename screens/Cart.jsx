@@ -13,12 +13,29 @@ import { Button } from "react-native-paper";
 import { SIZES } from "../constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 
-import { Minus, Plus, ArrowDown } from "../assets/svg/svg";
+const Asaro = require("../assets/cart-images/Asaro.png");
+const Riro = require("../assets/cart-images/Efo-roro.png");
+const MoiMoi = require("../assets/cart-images/Moi Moi.png");
 
-const Cart = () => {
+import {
+  Minus,
+  Plus,
+  ArrowDown,
+  MinusSmall,
+  PlusSmall,
+  DustBin,
+} from "../assets/svg/svg";
+
+const Cart = ({ navigation }) => {
   return (
     <SafeAreaView>
-      <TopBarMenu name="Cart" hide={true} padding={true} />
+      <TopBarMenu
+        name="Cart"
+        hide={true}
+        padding={true}
+        navigation={navigation}
+        place="ProductDetails"
+      />
       <ScrollView
         contentContainerStyle={styles.productContainer}
         horizontal={false}
@@ -26,14 +43,55 @@ const Cart = () => {
         <View>
           <ProductDetailsPage
             product={{
-              name: "African Donut Mix (Puff Puff)",
+              name: "Asaro",
+              innerName: "(Yam Porridge)",
               price: "£30",
-              image:
-                "https://s3-alpha-sig.figma.com/img/3fee/85b8/767c901f27b0dbe26a76f3d5cc1f80ae?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=AiYgo8fIhKsYKmgWbAhy80eVh7oysWN7dNW-K46fh~jDX51vU1ICwu13ya0BSgxK-KI2Mi0UAzhtbm2pw1Qjy2EVyUQzXx5tYi0wtAg6DNIdETI052HMWxyZ0QSS3w--f7QJFGBopQGIa4G5qmLqUKlel1WrgZHvkQBTp9Kqd-nU3tNipBQ4syg80cFmoH2nt3fv1jFdzK2WoNrmU5NbE2Lbz2o3~AB2CALxmu7OZJRhcZioDJinEP~JQ~kvDbmeAqiUqwuOv1VVOR6h57VjOWVimZAw6xUoGP5EyfP6o0ybYpc4LGCnRLKtWhdhiC3aFd0x8pDifWSNgWr3VT3g8g__",
-              description:
-                "Rare Eat Puff Puff Mix can be made into a deep-fried dough. They are made from yeast dough, shaped into balls and deep-fried until golden brown. It has a doughnut-like texture but slightly o....",
+              image: Asaro,
             }}
           />
+          <ProductDetailsPage
+            product={{
+              name: "Asaro",
+              innerName: "(Yam Porridge)",
+              price: "£30",
+              image: Riro,
+            }}
+          />
+          <ProductDetailsPage
+            product={{
+              name: "Asaro",
+              innerName: "(Yam Porridge)",
+              price: "£30",
+              image: MoiMoi,
+            }}
+          />
+        </View>
+
+        <View style={{ padding: 20 }}>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginBottom: 16,
+            }}
+          >
+            <Text style={{ fontSize: 16, color: "#151515" }}>
+              Total
+              <Text style={{ color: "#4A4A4A" }}> (3 items)</Text>
+            </Text>
+            <Text style={{ fontSize: 16, color: "#151515" }}>£90</Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              mode="contained"
+              buttonColor={"#DB3C25"}
+              onPress={() => console.log("Add to cart")}
+              style={{ marginBottom: 16 }}
+            >
+              Checkout - £90
+            </Button>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -44,56 +102,27 @@ const ProductDetailsPage = ({ product }) => {
   return (
     <View style={styles.container}>
       <View style={styles.cartContainer}>
-        <Image source={{ uri: product.image }} style={styles.cartImage} />
+        <Image source={product.image} style={styles.cartImage} />
 
         <View style={styles.cartTextContainer}>
           <View style={styles.cartInnerTextContainer}>
-            <Text style={{}}>Asaro (Yam Porridge)</Text>
-            <Minus />
+            <Text style={{}}>
+              {product.name}
+              <Text style={{ color: "#4A4A4A" }}> {product.innerName}</Text>
+            </Text>
+            <MinusSmall />
+          </View>
+          <View style={styles.cartInnerTextContainer}>
+            <Text style={{ color: "#DB3C25" }}>£30</Text>
+            <Text style={{ width: 32, textAlign: "center", color: "#4A4A4A" }}>
+              1
+            </Text>
+          </View>
+          <View style={styles.cartInnerTextContainer}>
+            <DustBin />
+            <PlusSmall />
           </View>
         </View>
-      </View>
-
-      <View style={{ marginBottom: 25, marginTop: 20 }}>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <TouchableOpacity>
-            <Minus />
-          </TouchableOpacity>
-          <Text
-            style={{
-              fontWeight: "medium",
-              fontSize: 14,
-              marginVertical: 10,
-              textAlign: "center",
-              flex: 1,
-              color: "#151515",
-            }}
-          >
-            1
-          </Text>
-
-          <TouchableOpacity>
-            <Plus />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <Button
-          mode="contained"
-          buttonColor={"#DB3C25"}
-          onPress={() => console.log("Add to cart")}
-          style={{ marginBottom: 16 }}
-        >
-          Checkout - £90
-        </Button>
       </View>
     </View>
   );
@@ -101,9 +130,14 @@ const ProductDetailsPage = ({ product }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 14,
   },
-  cartContainer: { padding: 8, display: "flex", flexDirection: "row" },
+  cartContainer: {
+    padding: 8,
+    display: "flex",
+    flexDirection: "row",
+  },
   cartImage: {
     width: 92,
     height: 92,
@@ -111,17 +145,17 @@ const styles = StyleSheet.create({
   cartTextContainer: {
     display: "flex",
     flexDirection: "column",
+    flexGrow: 1,
     gap: 4,
   },
   cartInnerTextContainer: {
     display: "flex",
+    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
   },
-
-  buttonContainer: {
-    marginBottom: 170,
-  },
+  buttonContainer: {},
 });
 
 export default Cart;
